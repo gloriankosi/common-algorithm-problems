@@ -1,34 +1,30 @@
 #include <iostream>
-#include <unordered_map>
+#include <vector>
 using namespace std;
 
 int lengthOfLongestSubstring(string);
 
-int main(int argc, char *argv[]) {}
+int main(int argc, char *argv[])
+{
+    string s = "ohomm";
+    cout << lengthOfLongestSubstring(s) << "\n";
+    return -1;
+}
 
 int lengthOfLongestSubstring(string s)
 {
-    int currentLen = 0;
     int largestSubstringLen = 0;
-    unordered_map<char, bool> seenChars;
-    while (!s.empty())
+    int x = -1;
+    vector<int> trackVector(128, -1); //s consists of English letters, digits, symbols and spaces.
+    for (int i = 0; i != s.length(); i++)
     {
-        auto it = seenChars.find(s.back());
-        if (it == seenChars.end())
+        if (trackVector[s[i]] > x)
         {
-            currentLen++;
-            seenChars.insert({s.back(), true});
-            s.pop_back();
+            x = trackVector[s[i]];
         }
-        else
-        {
-            if (currentLen > largestSubstringLen)
-            {
-                largestSubstringLen = currentLen;
-            }
-            currentLen = 0;
-            seenChars.clear();
-            //may or may not need a s.pop_back() here
-        }
+        trackVector[s[i]] = i;
+        cout << (int)s[i] << "\n";
+        largestSubstringLen = max(largestSubstringLen, i - x);
     }
+    return largestSubstringLen;
 }
