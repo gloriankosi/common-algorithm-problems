@@ -23,7 +23,6 @@ int lengthOfLongestSubstring(string s)
             x = trackVector[s[i]];
         }
         trackVector[s[i]] = i;
-        cout << (int)s[i] << "\n";
         largestSubstringLen = max(largestSubstringLen, i - x);
     }
     return largestSubstringLen;
