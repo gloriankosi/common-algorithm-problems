@@ -1,28 +1,30 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
+/**
+ * @file two-sorted-arr-median.cc
+ *
+ */
 #include <algorithm>
 #include <climits>
+#include <cmath>
+#include <iostream>
+#include <vector>
 using namespace std;
 
 // Solved with help from: https://www.youtube.com/watch?v=LPFhl65R7ww
-// NOTE: Not an easy problem, go watch the link posted above to understand what is going on
-// Comments with explanations coming soon.
+// NOTE: Not an easy problem, go watch the link posted above to understand what
+// is going on Comments with explanations coming soon.
 
 double findMedianSortedArrays(vector<int> &, vector<int> &);
 
-int main(int argc, char *argv[])
-{
-    //Sampe input
+int main(int argc, char *argv[]) {
+    // Sampe input
     vector<int> nums1 = {1, 2, 3, 4};
     vector<int> nums2 = {2, 4, 5, 6};
     cout << findMedianSortedArrays(nums1, nums2) << "\n";
     return 0;
 }
 
-double findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2)
-{
-    if (nums1.size() > nums2.size()) //swap to keep nums2 larger
+double findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2) {
+    if (nums1.size() > nums2.size())  // swap to keep nums2 larger
     {
         return findMedianSortedArrays(nums2, nums1);
     }
@@ -35,8 +37,7 @@ double findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2)
     int start = 0;
     int endIndexOfX = n1Size;
 
-    while (start <= endIndexOfX)
-    {
+    while (start <= endIndexOfX) {
         int positionX = (endIndexOfX + start) / 2;
         int positionY = (n1Size + n2Size + 1) / 2 - positionX;
 
@@ -46,27 +47,19 @@ double findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2)
         auto minRightX = (positionX == n1Size) ? INT_MAX : nums1[positionX];
         auto minRightY = (positionY == n2Size) ? INT_MAX : nums2[positionY];
 
-        if ((maxLeftX <= minRightY) and (maxLeftY <= minRightX))
-        {
+        if ((maxLeftX <= minRightY) and (maxLeftY <= minRightX)) {
             int totalSizeOfVecs = (n1Size + n2Size);
-            if (totalSizeOfVecs % 2 == 1)
-            {
+            if (totalSizeOfVecs % 2 == 1) {
                 median = max(maxLeftX, maxLeftY);
                 return median;
-            }
-            else
-            {
+            } else {
                 median = max(maxLeftX, maxLeftY) + min(minRightX, minRightY);
                 median = median / 2;
                 return median;
             }
-        }
-        else if (maxLeftX > minRightY)
-        {
+        } else if (maxLeftX > minRightY) {
             endIndexOfX = positionX - 1;
-        }
-        else
-        {
+        } else {
             start = positionX + 1;
         }
     }
