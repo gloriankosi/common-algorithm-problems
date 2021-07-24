@@ -1,3 +1,10 @@
+/**
+ * @file missing-num-in-arr.cc
+ * @brief
+ *
+ * Find the missing number in the array
+ *
+ */
 #include <cmath>
 #include <iostream>
 #include <vector>

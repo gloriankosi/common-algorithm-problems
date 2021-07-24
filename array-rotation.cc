@@ -2,7 +2,6 @@
 #include <vector>
 using namespace std;
 void rotate(vector<int>&, int);
-
 int main(int argc, char* argv[]) {
   vector<int> nums = {5, 10, 15, 22, 30, 45};
   rotate(nums, 1);
